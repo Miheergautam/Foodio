@@ -12,7 +12,7 @@ import Modal from "./components/Modal";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(""); 
+  const [modalType, setModalType] = useState("");
 
   const openModal = (type) => {
     setModalType(type);
@@ -25,12 +25,18 @@ function App() {
 
   return (
     <Router>
-      {/* Navbar */}
-      <Navbar openModal={openModal} />
-
       {/* Routes */}
       <Routes>
-        <Route path="/" element={<LandingPage openModal={openModal} />} />
+        <Route
+          path="/"
+          element={
+            <>
+              {/* Navbar Landing */}
+              <Navbar openModal={openModal} />
+              <LandingPage openModal={openModal} />
+            </>
+          }
+        />
         <Route path="/home" element={<Home />} />
       </Routes>
 
