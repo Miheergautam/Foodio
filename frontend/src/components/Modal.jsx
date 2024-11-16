@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Modal = ({ modalType, closeModal }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ const Modal = ({ modalType, closeModal }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,10 +24,34 @@ const Modal = ({ modalType, closeModal }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    closeModal();
+
+    try {
+      const endpoint =
+        modalType === "login"
+          ? "http://localhost:3000/api/auth/login"
+          : "http://localhost:3000/api/auth/register";
+      const payload =
+        modalType === "login"
+          ? { email: formData.email, password: formData.password }
+          : formData;
+
+      const response = await axios.post(endpoint, payload);
+
+      console.log("Response:", response.data);
+      alert(response.data.message || "Success!");
+      closeModal(); 
+      navigate("/home");
+    } catch (error) {
+      console.error(
+        "Error submitting the form:",
+        error.response?.data || error.message
+      );
+      alert(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+    }
   };
 
   return (
@@ -64,7 +92,11 @@ const Modal = ({ modalType, closeModal }) => {
               className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
             </span>
           </div>
 
