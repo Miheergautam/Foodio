@@ -1,2 +1,44 @@
-node_modules
+# Node.js dependencies
+node_modules/
+
+# Environment files
 .env
+
+# Logs
+*.log
+logs/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDE or editor files
+.idea/
+.vscode/
+*.swp
+
+# npm package-lock or yarn lock files (you may want to keep these for consistency, but generally, we ignore them)
+package-lock.json
+yarn.lock
+
+# Build output
+/dist
+/build
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Coverage reports (if you're using a testing framework like Jest)
+coverage/
+
+# Dependency directories
+jspm_packages/
+
+# Optional: TypeScript build directory
+/lib/
+
+# Optional: Generated files
+*.tgz
