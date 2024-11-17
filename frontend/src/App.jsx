@@ -1,12 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-//Pages
+// Pages
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
+import RestaurantListPage from "./pages/RestaurantListPage";
 
-//Components
+// Components
 import Navbar from "./components/Navbar";
 import Modal from "./components/Modal";
 
@@ -38,6 +38,14 @@ function App() {
           }
         />
         <Route path="/home" element={<Home />} />
+        <Route
+          path="/restaurants"
+          element={
+            <>
+              <RestaurantListPage />
+            </>
+          }
+        />
       </Routes>
 
       {/* Modal for Login/Sign Up */}
