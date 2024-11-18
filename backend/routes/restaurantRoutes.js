@@ -5,12 +5,12 @@ const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
 const router = express.Router();
 
 // Public Routes
-router.get("/list", restaurantController.getRestaurantList); //done
-router.get("/:id", restaurantController.getRestaurantDetails); //done
+router.get("/list", restaurantController.getRestaurantList); 
+router.get("/:id", restaurantController.getRestaurantDetails); 
 
 // Admin Routes
-router.post("/add", verifyToken, verifyAdmin, restaurantController.addRestaurant); //done
-router.patch("/update/:id", verifyToken, verifyAdmin, restaurantController.updateRestaurant); //done
-router.delete("/delete/:id", verifyToken, verifyAdmin, restaurantController.deleteRestaurant); // done
+router.post("/add", verifyToken, verifyAdmin, restaurantController.addRestaurant); 
+router.patch("/update/:id", verifyToken, verifyAdmin, restaurantController.updateRestaurant); 
+router.delete("/delete/:id", verifyToken, verifyAdmin, restaurantController.deleteRestaurant); 
 
 module.exports = router;
