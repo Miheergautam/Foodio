@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import NavbarRestaurant from "../components/NavbarRestaurant";
 
 const RestaurantListPage = () => {
@@ -17,33 +18,39 @@ const RestaurantListPage = () => {
       return;
     }
 
-    // Replace this mock fetch with your API endpoint
     const fetchRestaurants = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/restaurants?country=${country}&city=${city}`
+        const response = await axios.get(
+          `http://localhost:3000/api/restaurants/list`,
+          {
+            params: { country, city },
+          }
         );
-        const data = await response.json();
-        setRestaurants(data);
+        setRestaurants(response.data);
       } catch (error) {
         console.error("Error fetching restaurants:", error);
+        alert("Failed to fetch restaurants. Please try again later.");
       }
     };
 
     fetchRestaurants();
   }, [country, city, navigate]);
 
+  const handleViewDetails = (restaurant) => {
+    navigate("/restaurant-details", { state: restaurant });
+  };
+
   return (
     <div className="font-alegreya">
       {/* Navbar */}
-    <NavbarRestaurant userName="User" />
+      <NavbarRestaurant userName="User" />
 
       {/* Breadcrumb */}
       <div className="bg-gray-100 py-4 shadow-md">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-gray-600 text-sm">
-            <span className="text-deep-b font-bold">{country}</span> / Restaurants in{" "}
-            <span className="text-deep-b font-bold">{city}</span>
+            <span className="text-deep-b font-bold">{country}</span> /
+            Restaurants in <span className="text-deep-b font-bold">{city}</span>
           </p>
         </div>
       </div>
@@ -55,27 +62,44 @@ const RestaurantListPage = () => {
         </h1>
 
         {restaurants.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {restaurants.map((restaurant) => (
+          <div className="flex flex-col gap-8">
+            {restaurants.map((restaurant, index) => (
               <div
-                key={restaurant.id}
-                className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow overflow-hidden"
+                key={
+                  restaurant.id ||
+                  `${restaurant.name}-${restaurant.city}-${index}`
+                }
+                className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex items-start p-4"
               >
+                {/* Restaurant Image */}
                 <img
                   src={restaurant.image}
                   alt={restaurant.name}
-                  className="w-full h-48 object-cover"
+                  className="w-40 h-40 object-cover rounded-l-lg"
                 />
-                <div className="p-4">
+
+                {/* Content Section */}
+                <div className="flex-1 px-4 flex flex-col">
                   <h2 className="text-xl font-semibold text-deep-b truncate">
                     {restaurant.name}
                   </h2>
-                  <p className="text-gray-600 mt-2 line-clamp-2 text-sm">
+                  <p className="text-gray-600 mt-2 text-sm flex-grow">
                     {restaurant.description}
                   </p>
-                  <button className="bg-deep-b text-white py-2 px-4 mt-4 rounded-lg hover:bg-soft-y hover:text-deep-b transition-all">
-                    View Details
-                  </button>
+
+                  {/* Button Section */}
+                  <div className="flex justify-end mt-4">
+                    <button
+                      className="bg-deep-b text-white py-2 px-4 rounded-lg hover:bg-soft-y hover:text-deep-b transition-all"
+                      onClick={() =>
+                        navigate("/restaurant-details", {
+                          state: { restaurant },
+                        })
+                      }
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -87,6 +111,13 @@ const RestaurantListPage = () => {
           </p>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-4 mt-12">
+        <div className="max-w-7xl mx-auto text-center">
+          <p>&copy; {new Date().getFullYear()} Foodio. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };

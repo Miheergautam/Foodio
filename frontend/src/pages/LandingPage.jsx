@@ -6,9 +6,10 @@ import Footer from "../components/FooterLanding";
 const LandingPage = () => {
   return (
     <div className="font-alegreya">
-
       {/* Main Content */}
-      <div className="mt-16"> {/* Offset for fixed Navbar */}
+      <div className="mt-16">
+        {" "}
+        {/* Offset for fixed Navbar */}
         {/* Image and Hero Section */}
         <div className="relative w-full h-[66.67vh]">
           <img
@@ -20,7 +21,9 @@ const LandingPage = () => {
             {/* Heading */}
             <h1 className="text-5xl font-bold mb-8">
               Welcome to{" "}
-              <span className="text-soft-b font-extrabold text-6xl">FOODIO</span>
+              <span className="text-soft-b font-extrabold text-6xl">
+                FOODIO
+              </span>
             </h1>
 
             {/* Search Bar */}
@@ -29,7 +32,9 @@ const LandingPage = () => {
                 className="p-3 w-1/3 text-gray-700 bg-transparent border-r outline-none"
                 defaultValue=""
               >
-                <option value="" disabled>Select Country</option>
+                <option value="" disabled>
+                  Select Country
+                </option>
                 <option value="usa">USA</option>
                 <option value="india">India</option>
                 <option value="uk">UK</option>
@@ -48,7 +53,6 @@ const LandingPage = () => {
             <p className="text-3xl mt-10">"Carve Click & Enjoy!"</p>
           </div>
         </div>
-
         {/* Cards Section */}
         <div className="relative w-full bg-gray-100 py-10">
           <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-6 px-6">
@@ -62,7 +66,6 @@ const LandingPage = () => {
             ))}
           </div>
         </div>
-
         {/* Footer */}
         <Footer />
       </div>

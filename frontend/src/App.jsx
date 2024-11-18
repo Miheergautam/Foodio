@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import RestaurantListPage from "./pages/RestaurantListPage";
+import RestaurantDetailsPage from "./pages/RestaurantDetailsPage"; // Importing the new page
+import BillPage from "./pages/BillPage";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -46,6 +48,23 @@ function App() {
             </>
           }
         />
+        <Route
+          path="/restaurant-details"
+          element={
+            <>
+              <RestaurantDetailsPage />
+            </>
+          }
+        />
+        <Route
+          path="/order-summary"
+          element={
+            <>
+              <BillPage />
+            </>
+          }
+        />
+        
       </Routes>
 
       {/* Modal for Login/Sign Up */}

@@ -23,14 +23,16 @@ const HomePage = () => {
   return (
     <div className="font-alegreya">
       {/* Navbar */}
-      <NavbarHome userName="Miheer" />
+      <NavbarHome userName="Nick" />
 
       {/* Main Content */}
-      <div className="mt-16"> {/* Offset for fixed Navbar */}
+      <div className="mt-16">
+        {" "}
+        {/* Offset for fixed Navbar */}
         {/* Hero Section */}
         <div className="relative w-full h-[66.67vh]">
           <img
-            src="bg.avif" // Replace with your image path
+            src="bg.avif"
             alt="Home Background"
             className="w-full h-full object-cover"
           />
@@ -39,7 +41,7 @@ const HomePage = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
               Welcome back,{" "}
               <span className="text-soft-b font-extrabold text-5xl md:text-6xl">
-                Miheer
+                Nick
               </span>
             </h1>
 
@@ -53,9 +55,8 @@ const HomePage = () => {
                 <option value="" disabled>
                   Select Country
                 </option>
-                <option value="usa">USA</option>
-                <option value="india">India</option>
-                <option value="uk">UK</option>
+                <option value="USA">USA</option>
+                <option value="India">India</option>
               </select>
               <input
                 type="text"
@@ -74,11 +75,10 @@ const HomePage = () => {
 
             {/* Tagline */}
             <p className="text-2xl md:text-3xl mt-10 text-center">
-              "Discover the Best with Foodio!"
+              "Carve! Click! and Enjoy!"
             </p>
           </div>
         </div>
-
         {/* Cards Section */}
         <div className="relative w-full bg-gray-100 py-10">
           <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-6 px-6">
@@ -92,7 +92,6 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-
         {/* Footer */}
         <Footer />
       </div>
